@@ -15,7 +15,7 @@ export default function Page() {
       />
 
       <div className="text-center relative">
-        <h1 className="text-8xl mb-10 tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-accent-500 via-accent-800 to-accent-500 font-semibold animate-gradient bg-300%">
+        <h1 className="text-6xl sm:text-8xl mb-10 tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-accent-500 via-accent-800 to-accent-500 font-semibold animate-gradient bg-300%">
           Welcome to paradise.
         </h1>
         <Link
