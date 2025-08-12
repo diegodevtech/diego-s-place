@@ -31,8 +31,8 @@
     width: 60px;
     aspect-ratio: 1;
     border-radius: 50%;
-    border: 8px solid var(--color-primary-900);
-    border-right-color: var(colors-primary-200);
+    border: 8px solid theme('colors.primary.900');
+    border-right-color: theme('colors.primary.200');
     animation: rotate 1s infinite linear;
   }
 
