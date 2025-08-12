@@ -1,12 +1,12 @@
 import Image from "next/image";
 import about1 from "@/public/about-1.png";
 import Link from "next/link";
-// import { getCabins } from "../_service/data-service";
+import { getCabins } from "../_service/data-service";
 
 export const revalidate = 86400;
 
 export default async function Page() {
-  // const cabins = await getCabins();
+  const cabins = await getCabins();
   return (
     <div className="flex flex-col gap-y-4 mb-8 md:mb-0">
       <h1 className="text-4xl mb-4 text-accent-400 font-medium">
@@ -31,7 +31,7 @@ export default async function Page() {
             and enjoying simple pleasures with family.
           </p>
           <p>
-            Our X luxury cabins provide a cozy base, but the real freedom and
+            Our {cabins.length} luxury cabins provide a cozy base, but the real freedom and
             peace you&apos;ll find in the surrounding jungle. Wander through
             lush forests, breathe in the fresh air, and watch the stars twinkle
             above from the warmth of a campfire or your hot tub.
