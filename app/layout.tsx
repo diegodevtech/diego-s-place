@@ -23,7 +23,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         className={`flex flex-col antialiased bg-primary-950 text-primary-100 min-h-screen ${josefin.className}`}
       >
         <Header />
-        <div className="flex-1 px-8 py-12 grid">
+        <div className="flex-1 px-8 md:py-12 grid">
           <main className="max-w-7xl mx-auto w-full">
             {/* INFO AVAILABALE FOR ALL CLIENT-COMPONENTS, ONLY CC */}
             <ReservationProvider>{children}</ReservationProvider>
