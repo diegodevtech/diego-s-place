@@ -1,4 +1,5 @@
 import { getCabins } from "../_service/data-service";
+import { FilterTypes } from "../_types";
 import CabinCard from "./CabinCard";
 // RESETTING CACHE
 // import { unstable_noStore } from "next/cache"
@@ -6,7 +7,7 @@ import CabinCard from "./CabinCard";
 export default async function CabinList({
   filter,
 }: {
-  filter: "all" | "small" | "medium" | "large";
+  filter: FilterTypes;
 }) {
   const cabins = await getCabins();
 
