@@ -9,8 +9,8 @@ export default function Cabin({ cabin }: { cabin: CabinType }) {
     cabin;
 
   return (
-    <div className="grid grid-cols-[3fr_4fr] gap-20 border border-primary-800 py-3 px-10 mb-24">
-      <div className="relative scale-[1.15] -translate-x-3">
+    <div className="md:grid md:grid-cols-[3fr_4fr] md:gap-20 border border-primary-800 md:py-3 md:px-10 md:mb-24">
+      <div className="relative scale-[1.15] -translate-x-3 hidden md:block">
         <Image
           src={image ?? "/placeholder.png"}
           alt={`Cabin ${name}`}
@@ -18,9 +18,23 @@ export default function Cabin({ cabin }: { cabin: CabinType }) {
           className="object-cover"
         />
       </div>
+      <div className="relative md:hidden">
+        <Image
+          src={image ?? "/placeholder.png"}
+          alt={`Cabin ${name}`}
+          width={400}
+          height={100}
+          className="object-cover"
+        />
+      </div>
 
       <div>
-        <h3 className="text-accent-100 font-black text-7xl mb-5 translate-x-[-254px] bg-primary-950 p-6 pb-1 w-[150%]">
+        <h3
+          className="
+        text-accent-100 font-black md:text-7xl md:mb-5 md:translate-x-[-254px] bg-primary-950 md:p-6 md:pb-1 md:w-[150%]
+
+        "
+        >
           Cabin {name}
         </h3>
 
@@ -28,7 +42,7 @@ export default function Cabin({ cabin }: { cabin: CabinType }) {
           <TextExpander>{description ?? ""}</TextExpander>
         </p>
 
-        <ul className="flex flex-col gap-4 mb-7">
+        {/* <ul className="flex flex-col gap-4 mb-7">
           <li className="flex gap-3 items-center">
             <UsersIcon className="h-5 w-5 text-primary-600" />
             <span className="text-lg">
@@ -48,7 +62,7 @@ export default function Cabin({ cabin }: { cabin: CabinType }) {
               Privacy <span className="font-bold">100%</span> guaranteed
             </span>
           </li>
-        </ul>
+        </ul> */}
       </div>
     </div>
   );
