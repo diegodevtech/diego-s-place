@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import Spinner from "../_components/Spinner";
 import CabinList from "../_components/CabinList";
+import Filter from "../_components/Filter";
 
 export const metadata = {
   title: "Cabins",
@@ -26,7 +27,7 @@ export default async function Page({ searchParams }: { searchParams: { capacity?
 
       <div className="flex justify-end mb-8">
         {/* CLIENT-COMPONENT IN SERVER-COMPONENT */}
-        {/* <Filter /> */}
+        <Filter />
       </div>
 
       <Suspense fallback={<Spinner />} key={filter ? JSON.stringify(filter) : undefined}>
