@@ -1,17 +1,18 @@
 "use client";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { FilterTypes } from "../_types";
 
 export default function Filter() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
 
-  const activeFilter: "all" | "small" | "medium" | "large" =
-    (searchParams.get("capacity") as "all" | "small" | "medium" | "large") ??
+  const activeFilter: FilterTypes =
+    (searchParams.get("capacity") as FilterTypes) ??
     "all";
 
-  function handleFilter(filter: "all" | "small" | "medium" | "large") {
+  function handleFilter(filter: FilterTypes) {
     const params = new URLSearchParams(searchParams);
     params.set("capacity", filter);
     router.replace(`${pathname}?${params.toString()}`, { scroll: false });
@@ -57,9 +58,9 @@ function Button({
   activeFilter,
   children,
 }: {
-  filter: "all" | "small" | "medium" | "large";
-  handleFilter: (filter: "all" | "small" | "medium" | "large") => void;
-  activeFilter: "all" | "small" | "medium" | "large";
+  filter: FilterTypes;
+  handleFilter: (filter: FilterTypes) => void;
+  activeFilter: FilterTypes;
   children: React.ReactNode;
 }) {
   return (

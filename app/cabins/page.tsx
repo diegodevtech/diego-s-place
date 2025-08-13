@@ -2,13 +2,14 @@ import { Suspense } from "react";
 import Spinner from "../_components/Spinner";
 import CabinList from "../_components/CabinList";
 import Filter from "../_components/Filter";
+import { FilterTypes } from "../_types";
 
 export const metadata = {
   title: "Cabins",
 };
 
 // SEARCH PARAMS MAKES THE PAGE DYNAMIC
-export default async function Page({ searchParams }: { searchParams: { capacity?: 'all' | 'small' | 'medium' | 'large' } }) {
+export default async function Page({ searchParams }: { searchParams: { capacity?: FilterTypes } }) {
   const { capacity } = await searchParams;
   const filter = capacity ?? 'all';
 
