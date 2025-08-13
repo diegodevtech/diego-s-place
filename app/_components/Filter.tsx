@@ -19,7 +19,7 @@ export default function Filter() {
   }
 
   return (
-    <div className="border border-primary-800 flex">
+    <div className="border border-primary-800 flex flex-wrap justify-center">
       <Button
         filter="all"
         handleFilter={handleFilter}
