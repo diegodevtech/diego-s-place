@@ -9,7 +9,7 @@ export default function Cabin({ cabin }: { cabin: CabinType }) {
     cabin;
 
   return (
-    <div className="md:grid md:grid-cols-[3fr_4fr] md:gap-20 border border-primary-800 md:py-3 md:px-10 md:mb-24 mb-12 px-3">
+    <div className="md:grid md:grid-cols-[3fr_4fr] md:gap-20 border border-primary-800 md:py-3 md:px-10 md:mb-24 mb-12">
       <div className="relative scale-[1.15] -translate-x-3 hidden md:block">
         <Image
           src={image ?? "/placeholder.png"}
@@ -18,7 +18,7 @@ export default function Cabin({ cabin }: { cabin: CabinType }) {
           className="object-cover"
         />
       </div>
-      <div className="md:hidden mb-4 relative scale-[1.04] mt-2">
+      <div className="md:hidden mb-4">
         <Image
           src={image ?? "/placeholder.png"}
           alt={`Cabin ${name}`}
@@ -28,7 +28,7 @@ export default function Cabin({ cabin }: { cabin: CabinType }) {
         />
       </div>
 
-      <div>
+      <div className="p-2 md>p-0">
         <h3
           className="
         text-accent-100 font-black md:text-7xl mb-5 md:translate-x-[-254px] bg-primary-950 md:p-6 md:pb-1 md:w-[150%]
