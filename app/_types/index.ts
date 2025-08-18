@@ -1,3 +1,4 @@
+export type ReservationRange = { from: Date | undefined; to: Date | undefined };
 export type FilterTypes = "all" | "small" | "medium" | "large";
 export type CabinType = {
   id: number;
@@ -8,3 +9,7 @@ export type CabinType = {
   image: string | null;
   description: string | null;
 };
+export type BookedDate = {
+  start: Date;
+  end: Date;
+}
