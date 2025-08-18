@@ -1,7 +1,6 @@
 "use client";
 import { createContext, useContext, useState } from "react";
-
-type ReservationRange = { from: Date | undefined; to: Date | undefined };
+import { ReservationRange } from "../_types";
 
 type ReservationContextType = {
   range: ReservationRange;
