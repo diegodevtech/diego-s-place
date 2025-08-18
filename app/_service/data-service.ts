@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { supabase } from "./supabase";
 import { eachDayOfInterval } from "date-fns";
+import { BookedDate } from "../_types";
 
 export const getCabins = async function () {
   const { data, error } = await supabase
@@ -52,7 +53,7 @@ export async function getBookedDatesByCabinId(cabinId: number) {
   }
 
   // Converting to actual dates to be displayed in the date picker
-  const bookedDates = data
+  const bookedDates: BookedDate[] = data
     .map((booking) => {
       return eachDayOfInterval({
         start: new Date(booking.startDate!),
@@ -70,6 +71,29 @@ export async function getSettings() {
   if (error) {
     console.error(error);
     throw new Error('Settings could not be loaded');
+  }
+
+  return data;
+}
+
+// Guests are uniquely identified by their email address
+export async function getGuest(email: string) {
+  const { data } = await supabase
+    .from('guests')
+    .select('*')
+    .eq('email', email)
+    .single();
+
+  // No error here! We handle the possibility of no guest in the sign in callback
+  return data;
+}
+
+export async function createGuest(newGuest) {
+  const { data, error } = await supabase.from("guests").insert([newGuest]);
+
+  if (error) {
+    console.error(error);
+    throw new Error("Guest could not be created");
   }
 
   return data;
