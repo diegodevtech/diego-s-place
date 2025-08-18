@@ -1,3 +1,4 @@
+import { getBookedDatesByCabinId, getSettings } from "../_service/data-service";
 import { CabinType } from "../_types";
 
 export default async function Reservation({ cabin }: { cabin: CabinType }) {
