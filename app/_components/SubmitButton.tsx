@@ -9,7 +9,7 @@ export default function SubmitButton({
 }: {
   children: React.ReactNode;
   pendingLabel: React.ReactNode;
-  extraDisable: boolean;
+  extraDisable?: boolean;
 }) {
   // NEEDS TO BE A CLIENT COMPONENT
   // NEEDS TO BE RENDERED INSIDE A FORM COMPONENT
