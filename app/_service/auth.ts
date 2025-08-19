@@ -17,8 +17,8 @@ declare module "next-auth" {
 const authConfig: NextAuthConfig = {
   providers: [
     GoogleProvider({
-      clientId: process.env.AUTH_GOOGLE_ID ?? "",
-      clientSecret: process.env.AUTH_GOOGLE_SECRET ?? "",
+      clientId: process.env.AUTH_GOOGLE_ID!,
+      clientSecret: process.env.AUTH_GOOGLE_SECRET!,
     }),
   ],
   callbacks: {
@@ -31,7 +31,7 @@ const authConfig: NextAuthConfig = {
 
         const existingGuest = await getGuest(user.email);
         if (!existingGuest) {
-          await createGuest({ email: user.email, fullName: user.name ?? "" });
+          await createGuest({ email: user.email, fullName: user.name! });
         }
         return true;
       } catch {
