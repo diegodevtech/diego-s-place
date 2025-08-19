@@ -2,10 +2,11 @@
 
 import { differenceInDays, isPast, isSameDay, isWithinInterval } from "date-fns";
 import { DayPicker } from "react-day-picker";
-import { BookedDate, CabinType, ReservationRange } from "../_types";
+import "react-day-picker/dist/style.css";
+import { CabinType, ReservationRange, SettingsType } from "../_types";
 import { useReservation } from "../_contexts/ReservationContext";
 
-function isAlreadyBooked(range: ReservationRange, datesArr: BookedDate[]) {
+function isAlreadyBooked(range: ReservationRange, datesArr: Date[]) {
   return (
     range.from &&
     range.to &&
@@ -17,15 +18,21 @@ function isAlreadyBooked(range: ReservationRange, datesArr: BookedDate[]) {
 
 function DateSelector({ cabin, bookedDates, settings }: { 
   cabin: CabinType,
-  bookedDates: BookedDate[],
-  settings: any,
+  bookedDates: Date[],
+  settings: SettingsType,
  }) {
+  const emptyRange: ReservationRange = { from: undefined, to: undefined }
+
   const { range, setRange, resetRange } = useReservation();
 
-  const displayRange = isAlreadyBooked(range, bookedDates) ? {} : range;
+  const displayRange: ReservationRange = isAlreadyBooked(range, bookedDates) ? emptyRange : range;
 
   const { regularPrice, discount } = cabin;
-  const numNights = differenceInDays(displayRange.to, displayRange.from);
+
+  const numNights =
+    displayRange.from && displayRange.to
+      ? differenceInDays(displayRange.to, displayRange.from)
+      : 0;
   const cabinPrice = numNights * (regularPrice! - discount!);
 
   // SETTINGS
@@ -34,28 +41,32 @@ function DateSelector({ cabin, bookedDates, settings }: {
   return (
     <div className="flex flex-col justify-between">
       <DayPicker
-        // className="rdp"
-        className={`rdp pt-12 place-self-center`}
+        className={`rdp py-3 md:py-0 md:pt-12 place-self-center`}
         mode="range"
-        // onSelect={(range) => setRange(range)}
-        onSelect={setRange}
+        onSelect={(range) => {
+          if (range) {
+            setRange({ from: range.from, to: range.to });
+          } else {
+            setRange({ from: undefined, to: undefined });
+          }
+        }}
         selected={displayRange}
-        min={minBookingLength + 1}
-        max={maxBookingLength}
-        startMonth={new Date()}
-        hidden={{ before: new Date() }}
+        min={minBookingLength ? minBookingLength + 1 : 1}
+        max={maxBookingLength || undefined}
+        fromMonth={new Date()}
+        // hidden={{ before: new Date() }}
         // toYear={new Date().getFullYear() + 5}
-        endMonth={new Date(new Date().getFullYear() + 5, 0)}
+        toMonth={new Date(new Date().getFullYear() + 5, 0)}
         captionLayout="dropdown"
         numberOfMonths={2}
         disabled={(curDate) =>
           isPast(curDate) ||
-          bookedDates.some((date: Date) => isSameDay(date, curDate))
+          bookedDates.some((bookedDate) => isSameDay(new Date(bookedDate), curDate))
         }
       />
 
-      <div className="flex items-center justify-between px-8 bg-accent-500 text-primary-800 h-[72px]">
-        <div className="flex items-baseline gap-6">
+      <div className="flex items-center justify-between px-8 bg-accent-500 text-primary-800 min-[600px]:h-[72px] py-2 min-[600px]:py-0">
+        <div className="min-[600px]:flex items-baseline gap-4">
           <p className="flex gap-2 items-baseline">
             {discount! > 0 ? (
               <>

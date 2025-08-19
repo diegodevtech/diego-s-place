@@ -75,7 +75,21 @@
 /* For data picker */
 .rdp {
   --rdp-cell-size: 32px !important;
-  --rdp-accent-color: var(--colors-accent-500) !important;
-  --rdp-background-color: var(--colors-accent-600) !important;
+  --rdp-accent-color: theme('color-accent-500') !important;
+  --rdp-background-color: theme('color-accent-600') !important;
   margin: 0 !important;
+}
+
+.rdp-months {
+  @media (width < 600px) {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+
+.rdp-month {
+  @media (width < 600px){
+    margin: 0 !important;
+  }
 }

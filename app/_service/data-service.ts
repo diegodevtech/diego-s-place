@@ -1,7 +1,6 @@
 import { notFound } from "next/navigation";
 import { supabase } from "./supabase";
 import { eachDayOfInterval } from "date-fns";
-import { BookedDate } from "../_types";
 
 export const getCabins = async function () {
   const { data, error } = await supabase
@@ -53,7 +52,7 @@ export async function getBookedDatesByCabinId(cabinId: number) {
   }
 
   // Converting to actual dates to be displayed in the date picker
-  const bookedDates: BookedDate[] = data
+  const bookedDates: Date[] = data
     .map((booking) => {
       return eachDayOfInterval({
         start: new Date(booking.startDate!),
@@ -77,7 +76,8 @@ export async function getSettings() {
 }
 
 // Guests are uniquely identified by their email address
-export async function getGuest(email: string) {
+export async function getGuest(email: string | null) {
+  if(!email) return null
   const { data } = await supabase
     .from('guests')
     .select('*')
@@ -97,4 +97,16 @@ export async function createGuest(newGuest) {
   }
 
   return data;
+}
+
+export async function getCountries() {
+  try {
+    const res = await fetch(
+      "https://restcountries.com/v2/all?fields=name,flag"
+    );
+    const countries = await res.json();
+    return countries;
+  } catch {
+    throw new Error("Could not fetch countries");
+  }
 }
