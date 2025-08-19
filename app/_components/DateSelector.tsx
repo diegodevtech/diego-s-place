@@ -41,7 +41,7 @@ function DateSelector({ cabin, bookedDates, settings }: {
   return (
     <div className="flex flex-col justify-between">
       <DayPicker
-        className={`rdp pt-12 place-self-center`}
+        className={`rdp py-3 md:py-0 md:pt-12 place-self-center`}
         mode="range"
         onSelect={(range) => {
           if (range) {
@@ -54,7 +54,7 @@ function DateSelector({ cabin, bookedDates, settings }: {
         min={minBookingLength ? minBookingLength + 1 : 1}
         max={maxBookingLength || undefined}
         fromMonth={new Date()}
-        hidden={{ before: new Date() }}
+        // hidden={{ before: new Date() }}
         // toYear={new Date().getFullYear() + 5}
         toMonth={new Date(new Date().getFullYear() + 5, 0)}
         captionLayout="dropdown"
@@ -65,8 +65,8 @@ function DateSelector({ cabin, bookedDates, settings }: {
         }
       />
 
-      <div className="flex items-center justify-between px-8 bg-accent-500 text-primary-800 h-[72px]">
-        <div className="flex items-baseline gap-6">
+      <div className="flex items-center justify-between px-8 bg-accent-500 text-primary-800 min-[600px]:h-[72px] py-2 min-[600px]:py-0">
+        <div className="min-[600px]:flex items-baseline gap-4">
           <p className="flex gap-2 items-baseline">
             {discount! > 0 ? (
               <>
