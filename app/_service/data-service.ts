@@ -1,7 +1,6 @@
 import { notFound } from "next/navigation";
 import { supabase } from "./supabase";
 import { eachDayOfInterval } from "date-fns";
-import { BookedDate } from "../_types";
 
 export const getCabins = async function () {
   const { data, error } = await supabase
@@ -53,7 +52,7 @@ export async function getBookedDatesByCabinId(cabinId: number) {
   }
 
   // Converting to actual dates to be displayed in the date picker
-  const bookedDates: BookedDate[] = data
+  const bookedDates: Date[] = data
     .map((booking) => {
       return eachDayOfInterval({
         start: new Date(booking.startDate!),
