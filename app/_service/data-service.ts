@@ -76,7 +76,8 @@ export async function getSettings() {
 }
 
 // Guests are uniquely identified by their email address
-export async function getGuest(email: string) {
+export async function getGuest(email: string | null) {
+  if(!email) return null
   const { data } = await supabase
     .from('guests')
     .select('*')
@@ -96,4 +97,16 @@ export async function createGuest(newGuest) {
   }
 
   return data;
+}
+
+export async function getCountries() {
+  try {
+    const res = await fetch(
+      "https://restcountries.com/v2/all?fields=name,flag"
+    );
+    const countries = await res.json();
+    return countries;
+  } catch {
+    throw new Error("Could not fetch countries");
+  }
 }
